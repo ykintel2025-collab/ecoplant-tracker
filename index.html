@@ -31,7 +31,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; }
 
-/* NAV */
 nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
 .nav-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
 .nav-logo { width: 28px; height: 28px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
@@ -41,16 +40,19 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); paddin
 .nav-tab { font-size: 13px; padding: 6px 14px; border-radius: 6px; border: none; background: none; cursor: pointer; color: var(--text2); font-family: inherit; font-weight: 500; transition: all 0.15s; }
 .nav-tab:hover { background: var(--surface2); color: var(--text); }
 .nav-tab.active { background: var(--accent-light); color: var(--accent-text); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
 .nav-add { font-size: 13px; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border2); background: var(--surface); cursor: pointer; color: var(--text); font-family: inherit; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: all 0.15s; }
 .nav-add:hover { background: var(--surface2); border-color: var(--accent); color: var(--accent-text); }
+.sync-status { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 5px; }
+.sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text3); }
+.sync-dot.ok { background: #4caf50; }
+.sync-dot.busy { background: #ff9800; animation: pulse 1s infinite; }
+.sync-dot.err { background: var(--danger); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-/* MAIN */
 main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
-
-/* VIEWS */
 .view { display: none; } .view.active { display: block; }
 
-/* METRICS */
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px; }
 .metric { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
 .metric-val { font-size: 26px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; }
@@ -59,23 +61,22 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 .metric.amber .metric-val { color: var(--warn); }
 .metric.red .metric-val { color: var(--danger); }
 
-/* TIMELINE CARDS */
 .tl-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow); }
 .tl-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border); }
 .tl-title { font-size: 14px; font-weight: 600; }
 .tl-client { font-size: 12px; color: var(--text2); margin-top: 2px; }
 .tl-delivery { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text2); text-align: right; }
 .tl-delivery strong { display: block; font-size: 13px; color: var(--text); }
-.tl-steps { display: flex; align-items: center; padding: 16px 18px; gap: 0; }
+.tl-steps { display: flex; align-items: flex-start; padding: 16px 18px; gap: 0; }
 .tl-step { display: flex; align-items: center; flex: 1; }
-.tl-node { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.tl-node { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .tl-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; border: 2px solid transparent; }
 .tl-dot.done { background: var(--accent-light); color: var(--accent-text); border-color: var(--accent); }
 .tl-dot.pending { background: var(--warn-light); color: var(--warn); border-color: #e8a840; }
 .tl-dot.open { background: var(--surface2); color: var(--text3); border-color: var(--border2); }
 .tl-dot-lbl { font-size: 10px; color: var(--text3); white-space: nowrap; }
 .tl-dot-date { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text2); }
-.tl-line { flex: 1; height: 2px; background: var(--border); margin: 0 4px; position: relative; top: -10px; }
+.tl-line { flex: 1; height: 2px; background: var(--border); margin: 0 4px; position: relative; top: -16px; }
 .tl-line.done { background: var(--accent); }
 .tl-pay { display: flex; gap: 8px; padding: 0 18px 14px; flex-wrap: wrap; }
 .pay-chip { font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-family: 'DM Mono', monospace; }
@@ -84,13 +85,11 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 .btn-edit { font-size: 12px; padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border2); background: none; cursor: pointer; color: var(--text2); font-family: inherit; font-weight: 500; }
 .btn-edit:hover { background: var(--surface2); color: var(--text); }
 
-/* STATUS BADGE */
-.badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.01em; }
+.badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
 .badge.open { background: var(--surface2); color: var(--text2); }
 .badge.progress { background: var(--warn-light); color: var(--warn); }
 .badge.done { background: var(--accent-light); color: var(--accent-text); }
 
-/* UNIT CARDS (details view) */
 .unit-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 14px; overflow: hidden; box-shadow: var(--shadow); }
 .unit-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; cursor: pointer; user-select: none; }
 .unit-header:hover { background: var(--surface2); }
@@ -100,8 +99,7 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 .unit-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
 .unit-right { display: flex; align-items: center; gap: 10px; }
 .chevron { font-size: 18px; color: var(--text3); transition: transform 0.2s; line-height: 1; }
-.chevron.open { transform: rotate(180deg); }
-
+.chevron.open { transform: rotate(90deg); }
 .unit-body { display: none; border-top: 1px solid var(--border); }
 .unit-body.open { display: block; }
 .unit-section { padding: 16px 18px; border-bottom: 1px solid var(--border); }
@@ -112,14 +110,8 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 .field-full { grid-column: 1 / -1; }
 .field { display: flex; flex-direction: column; gap: 5px; }
 .field label { font-size: 12px; color: var(--text2); font-weight: 500; }
-.field input, .field select, .field textarea {
-  font-size: 13px; padding: 8px 11px; border: 1px solid var(--border);
-  border-radius: 8px; background: var(--surface); color: var(--text);
-  font-family: inherit; transition: border-color 0.15s; width: 100%;
-}
-.field input:focus, .field select:focus, .field textarea:focus {
-  outline: none; border-color: var(--accent);
-}
+.field input, .field select, .field textarea { font-size: 13px; padding: 8px 11px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-family: inherit; transition: border-color 0.15s; width: 100%; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
 .field textarea { resize: vertical; min-height: 64px; }
 .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .pay-field { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
@@ -131,8 +123,10 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 .btn-danger:hover { background: var(--danger-light); }
 .btn-primary { font-size: 13px; padding: 7px 16px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); cursor: pointer; color: white; font-family: inherit; font-weight: 500; }
 .btn-primary:hover { background: var(--accent-text); }
+.save-indicator { font-size: 11px; color: var(--text3); }
+.save-indicator.saving { color: var(--warn); }
+.save-indicator.saved { color: var(--accent); }
 
-/* MODAL */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--surface); border-radius: var(--radius-lg); max-width: 440px; width: 100%; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
@@ -145,19 +139,17 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 .modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
 .btn-cancel { font-size: 13px; padding: 7px 14px; border: 1px solid var(--border); border-radius: 8px; background: none; cursor: pointer; font-family: inherit; color: var(--text2); }
 
-/* EMPTY */
+.loading { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 14px; }
 .empty { text-align: center; padding: 60px 20px; color: var(--text3); }
-.empty svg { width: 48px; height: 48px; margin: 0 auto 16px; display: block; opacity: 0.3; }
-.empty p { font-size: 14px; }
+.empty p { font-size: 14px; margin-top: 12px; }
 
-/* MOBILE */
 @media (max-width: 600px) {
-  nav { padding: 0 14px; }
-  .nav-sub { display: none; }
+  nav { padding: 0 12px; }
+  .nav-sub, .sync-status span { display: none; }
   .nav-tabs { gap: 0; }
   .nav-tab { padding: 6px 10px; font-size: 12px; }
   .nav-add span { display: none; }
-  main { padding: 16px 10px 80px; }
+  main { padding: 14px 10px 80px; }
   .field-grid, .field-grid.three { grid-template-columns: 1fr; }
   .field-full { grid-column: 1; }
   .payment-grid { grid-template-columns: 1fr; }
@@ -182,42 +174,34 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
     <button class="nav-tab active" onclick="switchView('overview')">Overzicht</button>
     <button class="nav-tab" onclick="switchView('details')">Details</button>
   </div>
-  <button class="nav-add" onclick="openModal()">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
-    <span>Ecoplant toevoegen</span>
-  </button>
+  <div class="nav-right">
+    <div class="sync-status">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-label">Verbinden…</span>
+    </div>
+    <button class="nav-add" onclick="openModal()">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+      <span>Toevoegen</span>
+    </button>
+  </div>
 </nav>
 
 <main>
-  <!-- OVERVIEW -->
   <div class="view active" id="view-overview">
     <div class="metrics" id="metrics"></div>
-    <div id="timeline-list">
-      <div class="empty">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="32" height="32" rx="4"/><line x1="16" y1="18" x2="32" y2="18"/><line x1="16" y1="24" x2="28" y2="24"/><line x1="16" y1="30" x2="24" y2="30"/></svg>
-        <p>Voeg een Ecoplant toe om te beginnen</p>
-      </div>
-    </div>
+    <div id="timeline-list"><div class="loading">Gegevens laden…</div></div>
   </div>
-
-  <!-- DETAILS -->
   <div class="view" id="view-details">
-    <div class="units" id="units-list">
-      <div class="empty">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="32" height="32" rx="4"/><line x1="16" y1="18" x2="32" y2="18"/><line x1="16" y1="24" x2="28" y2="24"/><line x1="16" y1="30" x2="24" y2="30"/></svg>
-        <p>Nog geen Ecoplants toegevoegd</p>
-      </div>
-    </div>
+    <div id="units-list"><div class="loading">Gegevens laden…</div></div>
   </div>
 </main>
 
-<!-- ADD MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3>Ecoplant toevoegen</h3>
     <p>Vul de basisgegevens in. Je kunt daarna alles verder aanvullen.</p>
     <div class="modal-field">
-      <label>Naam (bijv. Ecoplant 4)</label>
+      <label>Naam</label>
       <input type="text" id="modal-name" placeholder="Ecoplant 4">
     </div>
     <div class="modal-field">
@@ -232,30 +216,137 @@ main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
 </div>
 
 <script>
-const STORAGE_KEY = 'ecoplant_tracker_v1';
+const SUPABASE_URL = 'https://rsxmrvqcndqaljaqxkzg.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzeG1ydnFjbmRxYWxqYXF4a3pnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzODk1ODksImV4cCI6MjA5NTk2NTU4OX0.ZmK-2tDx-n3rXncqGMLhNM5bM-Wk30peLCeVHtE05OU';
+const HEADERS = { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY };
 
-function loadData() {
+let units = [];
+let saveTimers = {};
+
+function setSyncStatus(state, label) {
+  const dot = document.getElementById('sync-dot');
+  const lbl = document.getElementById('sync-label');
+  dot.className = 'sync-dot ' + state;
+  lbl.textContent = label;
+}
+
+async function fetchUnits() {
   try {
-    const d = localStorage.getItem(STORAGE_KEY);
-    return d ? JSON.parse(d) : { units: [], nextId: 1 };
-  } catch(e) { return { units: [], nextId: 1 }; }
+    const res = await fetch(SUPABASE_URL + '/rest/v1/ecoplants?order=id.asc', { headers: HEADERS });
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+    units = data.map(dbToLocal);
+    setSyncStatus('ok', 'Gesynchroniseerd');
+    return true;
+  } catch(e) {
+    setSyncStatus('err', 'Fout');
+    console.error(e);
+    return false;
+  }
 }
 
-function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+function dbToLocal(r) {
+  return {
+    id: r.id, name: r.name, client: r.client||'', clientAddress: r.client_address||'',
+    contractNr: r.contract_nr||'', huisstijl: r.huisstijl||'', status: r.status||'open',
+    delivery: r.delivery||'', productionDone: r.production_done||'', transport: r.transport||'',
+    placement: r.placement||'', completion: r.completion||'',
+    payOrder: r.pay_order||'', payStart: r.pay_start||'',
+    payDelivery: r.pay_delivery||'', payCompletion: r.pay_completion||'', notes: r.notes||''
+  };
 }
 
-let state = loadData();
+function localToDb(u) {
+  return {
+    name: u.name, client: u.client, client_address: u.clientAddress,
+    contract_nr: u.contractNr, huisstijl: u.huisstijl, status: u.status,
+    delivery: u.delivery||null, production_done: u.productionDone||null,
+    transport: u.transport||null, placement: u.placement||null, completion: u.completion||null,
+    pay_order: u.payOrder, pay_start: u.payStart,
+    pay_delivery: u.payDelivery, pay_completion: u.payCompletion, notes: u.notes
+  };
+}
 
-// migrate nextId
-if (!state.nextId) {
-  state.nextId = (state.units.length ? Math.max(...state.units.map(u=>u.id)) + 1 : 1);
+async function saveUnit(id) {
+  const u = units.find(x => x.id === id);
+  if (!u) return;
+  setSyncStatus('busy', 'Opslaan…');
+  setIndicator(id, 'saving', 'Opslaan…');
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/ecoplants?id=eq.' + id, {
+      method: 'PATCH',
+      headers: { ...HEADERS, 'Prefer': 'return=minimal' },
+      body: JSON.stringify(localToDb(u))
+    });
+    if (!res.ok) throw new Error(await res.text());
+    setSyncStatus('ok', 'Gesynchroniseerd');
+    setIndicator(id, 'saved', 'Opgeslagen ✓');
+    setTimeout(() => setIndicator(id, '', ''), 2000);
+  } catch(e) {
+    setSyncStatus('err', 'Opslaan mislukt');
+    setIndicator(id, '', '');
+    console.error(e);
+  }
+}
+
+function setIndicator(id, cls, txt) {
+  const el = document.getElementById('ind-' + id);
+  if (el) { el.className = 'save-indicator ' + cls; el.textContent = txt; }
+}
+
+function upd(id, field, val) {
+  const u = units.find(x => x.id === id);
+  if (!u) return;
+  u[field] = val;
+  clearTimeout(saveTimers[id]);
+  saveTimers[id] = setTimeout(() => saveUnit(id), 800);
+  setIndicator(id, 'saving', 'Wijzigingen…');
+  renderMetrics();
+}
+
+async function addUnit(name, client) {
+  setSyncStatus('busy', 'Toevoegen…');
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/ecoplants', {
+      method: 'POST',
+      headers: { ...HEADERS, 'Prefer': 'return=representation' },
+      body: JSON.stringify({ name, client, status: 'open' })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+    const newUnit = dbToLocal(data[0]);
+    units.push(newUnit);
+    setSyncStatus('ok', 'Gesynchroniseerd');
+    return newUnit.id;
+  } catch(e) {
+    setSyncStatus('err', 'Fout');
+    console.error(e);
+    return null;
+  }
+}
+
+async function deleteUnit(id) {
+  setSyncStatus('busy', 'Verwijderen…');
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/ecoplants?id=eq.' + id, {
+      method: 'DELETE', headers: HEADERS
+    });
+    if (!res.ok) throw new Error(await res.text());
+    units = units.filter(u => u.id !== id);
+    setSyncStatus('ok', 'Gesynchroniseerd');
+    renderUnits();
+    renderMetrics();
+    renderTimeline();
+  } catch(e) {
+    setSyncStatus('err', 'Fout');
+    console.error(e);
+  }
 }
 
 function fmt(d) {
   if (!d) return '—';
   const [y,m,dy] = d.split('-');
-  return `${dy}-${m}-${y}`;
+  return dy+'-'+m+'-'+y;
 }
 
 function stepState(date) {
@@ -264,60 +355,50 @@ function stepState(date) {
 }
 
 function statusBadge(s) {
-  const labels = { open: 'Open', progress: 'In productie', done: 'Opgeleverd' };
-  return `<span class="badge ${s}">${labels[s]||s}</span>`;
+  const l = { open:'Open', progress:'In productie', done:'Opgeleverd' };
+  return `<span class="badge ${s}">${l[s]||s}</span>`;
 }
 
 function renderMetrics() {
-  const u = state.units;
-  const total = u.length;
-  const open = u.filter(x => x.status !== 'done').length;
-  const done = u.filter(x => x.status === 'done').length;
-  const noDate = u.filter(x => !x.delivery).length;
+  const total = units.length;
+  const open = units.filter(u => u.status !== 'done').length;
+  const done = units.filter(u => u.status === 'done').length;
+  const noDate = units.filter(u => !u.delivery).length;
   document.getElementById('metrics').innerHTML = `
     <div class="metric"><div class="metric-val">${total}</div><div class="metric-lbl">Ecoplants totaal</div></div>
     <div class="metric amber"><div class="metric-val">${open}</div><div class="metric-lbl">In behandeling</div></div>
     <div class="metric green"><div class="metric-val">${done}</div><div class="metric-lbl">Opgeleverd</div></div>
-    <div class="metric ${noDate>0?'red':'green'}"><div class="metric-val">${noDate}</div><div class="metric-lbl">Zonder leverdatum</div></div>
-  `;
+    <div class="metric ${noDate>0?'red':'green'}"><div class="metric-val">${noDate}</div><div class="metric-lbl">Zonder leverdatum</div></div>`;
 }
 
 function renderTimeline() {
   const el = document.getElementById('timeline-list');
-  if (!state.units.length) {
-    el.innerHTML = `<div class="empty"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="32" height="32" rx="4"/><line x1="16" y1="18" x2="32" y2="18"/><line x1="16" y1="24" x2="28" y2="24"/><line x1="16" y1="30" x2="24" y2="30"/></svg><p>Voeg een Ecoplant toe om te beginnen</p></div>`;
+  if (!units.length) {
+    el.innerHTML = `<div class="empty"><p>Voeg een Ecoplant toe om te beginnen</p></div>`;
     return;
   }
-  el.innerHTML = state.units.map(u => {
+  el.innerHTML = units.map(u => {
     const steps = [
-      { lbl: 'Productie', date: u.productionDone },
-      { lbl: 'Transport', date: u.transport },
-      { lbl: 'Plaatsing', date: u.placement },
-      { lbl: 'Oplevering', date: u.completion },
+      { lbl:'Productie', date:u.productionDone },
+      { lbl:'Transport', date:u.transport },
+      { lbl:'Plaatsing', date:u.placement },
+      { lbl:'Oplevering', date:u.completion }
     ];
-    const stepsHtml = steps.map((s, i) => {
+    const stepsHtml = steps.map((s,i) => {
       const st = stepState(s.date);
-      const lineClass = st === 'done' ? 'done' : '';
       return `<div class="tl-step">
         <div class="tl-node">
           <div class="tl-dot ${st}">${i+1}</div>
           <div class="tl-dot-lbl">${s.lbl}</div>
           <div class="tl-dot-date">${fmt(s.date)}</div>
         </div>
-        ${i < steps.length-1 ? `<div class="tl-line ${lineClass}"></div>` : ''}
+        ${i<steps.length-1?`<div class="tl-line ${st==='done'?'done':''}"></div>`:''}
       </div>`;
     }).join('');
-
     const pays = [
-      { lbl: 'Opdracht', val: u.payOrder },
-      { lbl: 'Productie', val: u.payStart },
-      { lbl: 'Levering', val: u.payDelivery },
-      { lbl: 'Oplevering', val: u.payCompletion },
+      {lbl:'Opdracht',val:u.payOrder},{lbl:'Productie',val:u.payStart},
+      {lbl:'Levering',val:u.payDelivery},{lbl:'Oplevering',val:u.payCompletion}
     ];
-    const payHtml = pays.map(p =>
-      `<span class="pay-chip ${p.val?'set':''}">${p.lbl}: ${p.val||'—'}</span>`
-    ).join('');
-
     return `<div class="tl-card">
       <div class="tl-head">
         <div>
@@ -330,34 +411,29 @@ function renderTimeline() {
         </div>
       </div>
       <div class="tl-steps">${stepsHtml}</div>
-      <div class="tl-pay">${payHtml}</div>
-      <div class="tl-actions">
-        <button class="btn-edit" onclick="switchView('details'); setTimeout(()=>openUnit(${u.id}),100)">✏️ Bewerken</button>
-      </div>
+      <div class="tl-pay">${pays.map(p=>`<span class="pay-chip ${p.val?'set':''}">${p.lbl}: ${p.val||'—'}</span>`).join('')}</div>
+      <div class="tl-actions"><button class="btn-edit" onclick="switchView('details');setTimeout(()=>openUnit(${u.id}),120)">✏️ Bewerken</button></div>
     </div>`;
   }).join('');
 }
 
 function renderUnits() {
   const el = document.getElementById('units-list');
-  if (!state.units.length) {
-    el.innerHTML = `<div class="empty"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="32" height="32" rx="4"/><line x1="16" y1="18" x2="32" y2="18"/><line x1="16" y1="24" x2="28" y2="24"/><line x1="16" y1="30" x2="24" y2="30"/></svg><p>Nog geen Ecoplants toegevoegd</p></div>`;
+  if (!units.length) {
+    el.innerHTML = `<div class="empty"><p>Nog geen Ecoplants toegevoegd</p></div>`;
     return;
   }
-  el.innerHTML = state.units.map(u => `
+  el.innerHTML = units.map(u => `
     <div class="unit-card" id="card-${u.id}">
       <div class="unit-header" onclick="toggleUnit(${u.id})">
         <div class="unit-left">
           <div class="unit-avatar">${u.id}</div>
           <div>
-            <div class="unit-name">${u.name}</div>
-            <div class="unit-sub">${u.client||'Klant nog niet ingevuld'}${u.delivery?' · Levering: '+fmt(u.delivery):''}</div>
+            <div class="unit-name">${esc(u.name)}</div>
+            <div class="unit-sub">${esc(u.client)||'Klant nog niet ingevuld'}${u.delivery?' · '+fmt(u.delivery):''}</div>
           </div>
         </div>
-        <div class="unit-right">
-          ${statusBadge(u.status)}
-          <span class="chevron" id="chev-${u.id}">›</span>
-        </div>
+        <div class="unit-right">${statusBadge(u.status)}<span class="chevron" id="chev-${u.id}">›</span></div>
       </div>
       <div class="unit-body" id="body-${u.id}">
         <div class="unit-section">
@@ -396,31 +472,25 @@ function renderUnits() {
         <div class="unit-section">
           <div class="section-title">Betalingsmomenten</div>
           <div class="payment-grid">
-            <div class="pay-field"><label>Bij opdracht</label><input type="text" value="${esc(u.payOrder)}" oninput="upd(${u.id},'payOrder',this.value)" placeholder="€ 0.000 — dd-mm-jjjj"></div>
-            <div class="pay-field"><label>Bij start productie</label><input type="text" value="${esc(u.payStart)}" oninput="upd(${u.id},'payStart',this.value)" placeholder="€ 0.000 — dd-mm-jjjj"></div>
-            <div class="pay-field"><label>Bij levering</label><input type="text" value="${esc(u.payDelivery)}" oninput="upd(${u.id},'payDelivery',this.value)" placeholder="€ 0.000 — dd-mm-jjjj"></div>
-            <div class="pay-field"><label>Bij oplevering</label><input type="text" value="${esc(u.payCompletion)}" oninput="upd(${u.id},'payCompletion',this.value)" placeholder="€ 0.000 — dd-mm-jjjj"></div>
+            <div class="pay-field"><label>Bij opdracht</label><input type="text" value="${esc(u.payOrder)}" oninput="upd(${u.id},'payOrder',this.value)" placeholder="€ bedrag — datum"></div>
+            <div class="pay-field"><label>Bij start productie</label><input type="text" value="${esc(u.payStart)}" oninput="upd(${u.id},'payStart',this.value)" placeholder="€ bedrag — datum"></div>
+            <div class="pay-field"><label>Bij levering</label><input type="text" value="${esc(u.payDelivery)}" oninput="upd(${u.id},'payDelivery',this.value)" placeholder="€ bedrag — datum"></div>
+            <div class="pay-field"><label>Bij oplevering</label><input type="text" value="${esc(u.payCompletion)}" oninput="upd(${u.id},'payCompletion',this.value)" placeholder="€ bedrag — datum"></div>
           </div>
         </div>
         <div class="unit-section">
           <div class="section-title">Notities</div>
-          <div class="field"><textarea oninput="upd(${u.id},'notes',this.value)" placeholder="Bijzonderheden, afspraken, aandachtspunten, huisstijl details…">${esc(u.notes)}</textarea></div>
+          <div class="field"><textarea oninput="upd(${u.id},'notes',this.value)" placeholder="Bijzonderheden, afspraken, aandachtspunten…">${esc(u.notes)}</textarea></div>
         </div>
         <div class="unit-footer">
-          <button class="btn-danger" onclick="removeUnit(${u.id})">🗑 Verwijderen</button>
-          <div style="font-size:12px;color:var(--text3)">Wijzigingen worden automatisch opgeslagen</div>
+          <button class="btn-danger" onclick="if(confirm('Verwijderen?'))deleteUnit(${u.id})">🗑 Verwijderen</button>
+          <span class="save-indicator" id="ind-${u.id}"></span>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function esc(s) { return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-
-function upd(id, field, val) {
-  const u = state.units.find(x => x.id === id);
-  if (u) { u[field] = val; saveData(); }
-}
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 function toggleUnit(id) {
   const body = document.getElementById('body-'+id);
@@ -438,64 +508,59 @@ function openUnit(id) {
     chev.classList.add('open');
     chev.textContent = '⌄';
   }
-  document.getElementById('card-'+id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function removeUnit(id) {
-  if (!confirm('Weet je zeker dat je deze Ecoplant wilt verwijderen?')) return;
-  state.units = state.units.filter(u => u.id !== id);
-  saveData();
-  renderUnits();
-  renderMetrics();
-  renderTimeline();
+  document.getElementById('card-'+id)?.scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
 function switchView(view) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('view-'+view).classList.add('active');
-  const tabs = { overview: 0, details: 1 };
-  document.querySelectorAll('.nav-tab')[tabs[view]].classList.add('active');
-  if (view === 'overview') { renderMetrics(); renderTimeline(); }
-  if (view === 'details') renderUnits();
+  document.querySelectorAll('.nav-tab')[view==='overview'?0:1].classList.add('active');
+  if (view==='overview') { renderMetrics(); renderTimeline(); }
+  if (view==='details') renderUnits();
 }
 
 function openModal() {
   document.getElementById('modal').classList.add('open');
-  document.getElementById('modal-name').value = 'Ecoplant ' + state.nextId;
+  document.getElementById('modal-name').value = 'Ecoplant ' + (units.length + 1);
   document.getElementById('modal-client').value = '';
-  document.getElementById('modal-name').focus();
+  setTimeout(() => document.getElementById('modal-name').focus(), 100);
 }
 
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
 
-function confirmAdd() {
-  const name = document.getElementById('modal-name').value.trim() || ('Ecoplant ' + state.nextId);
+async function confirmAdd() {
+  const name = document.getElementById('modal-name').value.trim() || ('Ecoplant ' + (units.length+1));
   const client = document.getElementById('modal-client').value.trim();
-  state.units.push({
-    id: state.nextId++, name, client, clientAddress: '', contractNr: '',
-    huisstijl: '', status: 'open', delivery: '', productionDone: '',
-    transport: '', placement: '', completion: '',
-    payOrder: '', payStart: '', payDelivery: '', payCompletion: '', notes: ''
-  });
-  saveData();
   closeModal();
-  switchView('details');
-  setTimeout(() => openUnit(state.units[state.units.length-1].id), 150);
+  const newId = await addUnit(name, client);
+  if (newId) {
+    switchView('details');
+    setTimeout(() => openUnit(newId), 150);
+  }
 }
 
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal')) closeModal();
-});
+document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'Enter' && document.getElementById('modal').classList.contains('open')) confirmAdd();
+  if (e.key==='Escape') closeModal();
+  if (e.key==='Enter' && document.getElementById('modal').classList.contains('open')) confirmAdd();
 });
 
-renderMetrics();
-renderTimeline();
+// Auto-refresh elke 30 seconden
+setInterval(async () => {
+  await fetchUnits();
+  const activeView = document.querySelector('.view.active')?.id;
+  if (activeView==='view-overview') { renderMetrics(); renderTimeline(); }
+  if (activeView==='view-details') renderUnits();
+}, 30000);
+
+// Init
+(async () => {
+  setSyncStatus('busy', 'Verbinden…');
+  await fetchUnits();
+  renderMetrics();
+  renderTimeline();
+})();
 </script>
 </body>
 </html>
